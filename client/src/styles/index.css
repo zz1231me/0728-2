@@ -1,0 +1,319 @@
+/* C:\jamtori\client\src\styles\index.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🔧 Preflight 비활성화로 인한 cursor 문제 해결 + 커스텀 커서 적용 */
+@layer base {
+  /* 전체 페이지에 커스텀 커서 적용 */
+  *,
+  *::before,
+  *::after {
+    cursor: url('/cursors/oth677.cur'), auto !important;
+  }
+
+  /* body와 html에도 명시적으로 적용 */
+  html,
+  body {
+    cursor: url('/cursors/oth677.cur'), auto !important;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #FAFAFA;
+  }
+
+  /* 클릭 가능한 요소들의 cursor 스타일 */
+  button,
+  [role="button"],
+  [type="button"],
+  [type="submit"],
+  [type="reset"] {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* 링크 요소 cursor */
+  a,
+  [role="link"] {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* 비활성화된 요소 */
+  button:disabled,
+  [role="button"][aria-disabled="true"] {
+    cursor: url('/cursors/oth677.cur'), not-allowed !important;
+  }
+
+  /* input 요소들의 cursor */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select {
+    cursor: url('/cursors/oth677.cur'), text !important;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* 추가 커스텀 커서 스타일들 */
+  
+  /* 드래그 가능한 요소 */
+  [draggable="true"],
+  .draggable {
+    cursor: url('/cursors/oth677.cur'), grab !important;
+  }
+
+  [draggable="true"]:active,
+  .draggable:active {
+    cursor: url('/cursors/oth677.cur'), grabbing !important;
+  }
+
+  /* 로딩 상태 */
+  .loading,
+  .spinner,
+  [aria-busy="true"] {
+    cursor: url('/cursors/oth677.cur'), wait !important;
+  }
+
+  /* 확대/축소 */
+  .zoom-in,
+  .zoomable {
+    cursor: url('/cursors/oth677.cur'), zoom-in !important;
+  }
+
+  .zoom-out {
+    cursor: url('/cursors/oth677.cur'), zoom-out !important;
+  }
+
+  /* 도움말 */
+  .help,
+  [title]:not([title=""]),
+  .tooltip {
+    cursor: url('/cursors/oth677.cur'), help !important;
+  }
+
+  /* 이동 가능 */
+  .move,
+  .movable {
+    cursor: url('/cursors/oth677.cur'), move !important;
+  }
+
+  /* 복사 */
+  .copy,
+  .copyable {
+    cursor: url('/cursors/oth677.cur'), copy !important;
+  }
+
+  /* 크기 조절 */
+  .resize,
+  .resizable {
+    cursor: url('/cursors/oth677.cur'), nw-resize !important;
+  }
+
+  /* React 컴포넌트들 */
+  
+  /* 게시판 관련 */
+  .post-item:hover,
+  .comment-item:hover {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* 카드 및 타일 */
+  .card:hover,
+  .tile:hover,
+  .dashboard-item:hover {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* 네비게이션 */
+  .nav-item,
+  .menu-item,
+  .breadcrumb-item a {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* 모달 */
+  .modal-close,
+  .close-button {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* 탭 */
+  .tab,
+  .tab-button {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* 드롭다운 */
+  .dropdown-toggle,
+  .dropdown-item {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* 페이지네이션 */
+  .pagination button,
+  .page-link {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* 첨부파일 */
+  .attachment-item {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* Toast UI Editor */
+  .toastui-editor .te-md-container .te-editor {
+    cursor: url('/cursors/oth677.cur'), text !important;
+  }
+
+  .toastui-editor .te-toolbar-section button {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* 이미지 뷰어 */
+  .image-viewer {
+    cursor: url('/cursors/oth677.cur'), zoom-out !important;
+  }
+
+  .image-viewer .control-button {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+
+  /* 게시글 이미지 */
+  .content-image-clickable {
+    cursor: url('/cursors/oth677.cur'), zoom-in !important;
+  }
+
+  .content-image-hover {
+    cursor: url('/cursors/oth677.cur'), zoom-in !important;
+  }
+
+  /* 스크롤바 */
+  ::-webkit-scrollbar {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+}
+
+/* 🔧 Tailwind utilities 확장 - 커스텀 커서 포함 */
+@layer utilities {
+  .cursor-pointer {
+    cursor: url('/cursors/oth677.cur'), pointer !important;
+  }
+  
+  .cursor-not-allowed {
+    cursor: url('/cursors/oth677.cur'), not-allowed !important;
+  }
+
+  .cursor-text {
+    cursor: url('/cursors/oth677.cur'), text !important;
+  }
+
+  .cursor-grab {
+    cursor: url('/cursors/oth677.cur'), grab !important;
+  }
+
+  .cursor-grabbing {
+    cursor: url('/cursors/oth677.cur'), grabbing !important;
+  }
+
+  .cursor-zoom-in {
+    cursor: url('/cursors/oth677.cur'), zoom-in !important;
+  }
+
+  .cursor-zoom-out {
+    cursor: url('/cursors/oth677.cur'), zoom-out !important;
+  }
+
+  .cursor-wait {
+    cursor: url('/cursors/oth677.cur'), wait !important;
+  }
+
+  .cursor-help {
+    cursor: url('/cursors/oth677.cur'), help !important;
+  }
+
+  .cursor-move {
+    cursor: url('/cursors/oth677.cur'), move !important;
+  }
+
+  .cursor-copy {
+    cursor: url('/cursors/oth677.cur'), copy !important;
+  }
+
+  .cursor-resize {
+    cursor: url('/cursors/oth677.cur'), nw-resize !important;
+  }
+
+  .cursor-default {
+    cursor: url('/cursors/oth677.cur'), auto !important;
+  }
+}
+
+/* 반응형 및 접근성 고려 */
+
+/* 모바일/터치 디바이스에서는 기본 커서 사용 */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  *,
+  *::before,
+  *::after {
+    cursor: auto !important;
+  }
+
+  button,
+  [role="button"],
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  a,
+  [role="link"] {
+    cursor: pointer !important;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select {
+    cursor: text !important;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer !important;
+  }
+
+  button:disabled,
+  [role="button"][aria-disabled="true"] {
+    cursor: not-allowed !important;
+  }
+}
+
+/* 프린트 모드에서는 커서 숨김 */
+@media print {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+  * {
+    cursor: url('/cursors/oth677.cur'), auto !important;
+  }
+}
+
+/* 애니메이션 감소 설정 고려 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    cursor: url('/cursors/oth677.cur'), auto !important;
+  }
+}

@@ -1,0 +1,261 @@
+/* src/styles/ContentImageStyles.css - 호버 효과 단순화 (검정 테두리/그림자) */
+
+/* 성능 최적화된 CSS 애니메이션 (하드웨어 가속) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -5px, 0) scale3d(0.95, 0.95, 1);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  }
+}
+
+/* 기본 클릭 가능한 이미지 스타일 */
+.content-image-clickable {
+  cursor: pointer !important;
+  transition: border 0.15s ease, box-shadow 0.15s ease !important;
+  border-radius: 8px !important;
+  border: 2px solid transparent !important; /* 투명한 테두리 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  will-change: border-color, box-shadow !important;
+  transform: translate3d(0, 0, 0) !important; /* 하드웨어 가속 활성화 */
+  backface-visibility: hidden !important;
+  /* 이미지 품질 최적화 */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  /* 성능 최적화: contain 속성 사용 */
+  contain: layout style paint !important;
+}
+
+/* 호버 상태 - 테두리와 그림자만 강화 */
+.content-image-hover {
+  border-color: #000000 !important; /* 검정색 테두리 */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important; /* 강화된 검정 그림자 */
+  /* 확대/이동/밝기 효과 모두 제거 */
+  transform: translate3d(0, 0, 0) !important;
+  filter: none !important;
+}
+
+/* ✅ ToastUI Viewer 이미지 기본 스타일 - 문제 해결 */
+.toastui-editor-contents img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 16px auto; /* 이미지만 중앙 정렬 */
+  position: relative;
+}
+
+/* ✅ 모든 문단의 기본 정렬을 왼쪽으로 강제 설정 */
+.toastui-editor-contents p {
+  text-align: left !important;
+}
+
+/* ✅ 이미지가 포함된 문단은 이미지만 중앙에 배치하되, 텍스트 정렬은 영향 없음 */
+.toastui-editor-contents p:has(img) {
+  position: relative;
+  /* text-align: center 제거 - 이것이 문제의 원인이었음 */
+}
+
+/* Firefox 등 :has() 미지원 브라우저 대응 */
+@supports not selector(:has(*)) {
+  .toastui-editor-contents p {
+    position: relative;
+    text-align: left !important; /* 강제로 왼쪽 정렬 */
+  }
+  
+  .toastui-editor-contents p > img:only-child {
+    display: block;
+    margin: 16px auto; /* 이미지만 중앙 정렬 */
+  }
+}
+
+/* ✅ 이미지 다음에 오는 모든 요소의 정렬 확실히 초기화 */
+.toastui-editor-contents p + p,
+.toastui-editor-contents p + h1,
+.toastui-editor-contents p + h2,
+.toastui-editor-contents p + h3,
+.toastui-editor-contents p + h4,
+.toastui-editor-contents p + h5,
+.toastui-editor-contents p + h6,
+.toastui-editor-contents p + ul,
+.toastui-editor-contents p + ol,
+.toastui-editor-contents p + blockquote {
+  text-align: left !important;
+}
+
+/* 툴팁 최적화 스타일 */
+.image-click-tooltip {
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  background: rgba(0, 0, 0, 0.85) !important;
+  color: white !important;
+  padding: 6px 10px !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  z-index: 10 !important;
+  pointer-events: none !important;
+  white-space: nowrap !important;
+  opacity: 0 !important;
+  transform: translate3d(0, 0, 0) !important;
+  transition: opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  backdrop-filter: blur(8px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  contain: layout style paint !important;
+}
+
+/* 툴팁 표시 최적화 */
+.content-image-clickable:hover .image-click-tooltip {
+  opacity: 1 !important;
+  animation: fadeIn 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+/* 반응형 최적화 */
+@media (max-width: 768px) {
+  .toastui-editor-contents img {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 12px auto !important;
+  }
+  
+  .image-click-tooltip {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    top: 6px !important;
+    right: 6px !important;
+  }
+  
+  /* 모바일에서도 동일한 호버 효과 */
+  .content-image-hover {
+    border-color: #000000 !important;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* 터치 디바이스에서도 동일한 효과 */
+@media (hover: none) and (pointer: coarse) {
+  .content-image-clickable {
+    transition-duration: 0.1s !important;
+  }
+  
+  .content-image-clickable:active {
+    border-color: #000000 !important;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* 고해상도 디스플레이 최적화 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .content-image-clickable {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .content-image-clickable {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08) !important;
+  }
+  
+  .content-image-hover {
+    border-color: #ffffff !important; /* 다크모드에서는 흰색 테두리 */
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3) !important; /* 다크모드에서는 흰색 그림자 */
+  }
+  
+  .image-click-tooltip {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #1a1a1a !important;
+    backdrop-filter: blur(12px) saturate(180%) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+/* 접근성: 애니메이션 감소 설정 */
+@media (prefers-reduced-motion: reduce) {
+  .content-image-clickable,
+  .image-click-tooltip {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .content-image-hover {
+    border-color: #000000 !important;
+    box-shadow: 0 0 0 3px #000000 !important;
+  }
+}
+
+/* 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+  .content-image-clickable {
+    border: 2px solid transparent !important;
+  }
+  
+  .content-image-hover {
+    border-color: #000000 !important;
+    box-shadow: 0 0 0 4px #000000 !important;
+  }
+  
+  .image-click-tooltip {
+    background: #000 !important;
+    color: #fff !important;
+    border: 1px solid #fff !important;
+  }
+}
+
+/* 프린트 최적화 */
+@media print {
+  .image-click-tooltip {
+    display: none !important;
+  }
+  
+  .content-image-clickable {
+    border: none !important;
+    box-shadow: none !important;
+    cursor: default !important;
+    transition: none !important;
+  }
+  
+  .content-image-hover {
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* GPU 메모리 사용량 최적화 */
+@supports (will-change: transform) {
+  .content-image-clickable:not(.content-image-hover) {
+    will-change: auto !important;
+  }
+  
+  .content-image-hover {
+    will-change: border-color, box-shadow !important;
+  }
+}
+
+/* 로딩 상태를 위한 스켈레톤 효과 (옵션) */
+.content-image-clickable[data-loading="true"] {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.05) 25%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.05) 75%
+  ) !important;
+  background-size: 200% 100% !important;
+  animation: shimmer 1.5s ease-in-out infinite !important;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
